@@ -57,8 +57,8 @@ Things you may want to cover:
   ### purchase テーブル
   | Column | Type      | Options     |
   |----------------------------------|
-  | use_id  | references | null: false, foreign_key:true |
-  | item  | references   | null: false, foreign_key:true |
+  | use_id  | references   | null: false, foreign_key:true |
+  | item    | references   | null: false, foreign_key:true |
 
   ### Association
   - belongs_to :users
