@@ -26,8 +26,8 @@ Things you may want to cover:
 # テーブル設計
 
   ### users テーブル
-  |Column    |Type    | Options                             |
-  |---------------------------------------------------------|
+  | Column             |Type    | Options                   |
+  | ------------------------------------------------------- |
   | nickname           | string | null: false               |
   | email              | string | null: false, unique: true |
   | encrypted_password | string | null: false               |
@@ -44,7 +44,7 @@ Things you may want to cover:
 
   ### items テーブル
   | Column             | Type           | Option      |
-  |------------------------------------------------|
+  | ------------------------------------------------- |
   | item               | string         | null: false |
   | text               | text           | null: false |
   | category_id        | string         | null: false |
@@ -59,8 +59,8 @@ Things you may want to cover:
   - belongs_to :purchases
 
   ### purchases テーブル
-  | Column | Type          | Options                       |
-  |--------------------------------------------------------|
+  | Column  | Type         | Options                       |
+  | ------------------------------------------------------ |
   | use_id  | references   | null: false, foreign_key:true |
   | item    | references   | null: false, foreign_key:true |
 
@@ -70,8 +70,8 @@ Things you may want to cover:
   - has_many :items
  
   ### shipping address テーブル
-  | Column  | Type       | Options     |
-  |----- ------------------------------|
+  | Column  | Type       | Options                       |
+  | ---- ----------------------------------------------- |
   | user_id | references | null: false, foreign_key:true |
   | address | string     | null: false                   |
 
