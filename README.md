@@ -26,7 +26,7 @@ Things you may want to cover:
 # テーブル設計
 
   ### users テーブル
-  | Column             | Type    | Options                  |
+  | Column             | Type   | Options                   |
   | ------------------------------------------------------- |
   | nickname           | string | null: false               |
   | email              | string | null: false, unique: true |
@@ -44,7 +44,7 @@ Things you may want to cover:
   ### items テーブル
   | Column             | Type            | Option                        |
   | -------------------------------------------------------------------- |
-  | user_id            | references      | null: false, foreign_key:true |
+  | user               | references      | null: false, foreign_key:true |
   | item               | string          | null: false                   |
   | text               | text            | null: false                   |
   | category_id        | integer         | null: false                   |
@@ -61,24 +61,24 @@ Things you may want to cover:
   ### purchases テーブル
   | Column  | Type         | Options                       |
   | ------------------------------------------------------ |
-  | user_id | references   | null: false, foreign_key:true |
-  | item_id | references   | null: false, foreign_key:true |
+  | user    | references   | null: false, foreign_key:true |
+  | item    | references   | null: false, foreign_key:true |
 
   ### Association
   - belongs_to :user
-  - has_one :shipping address
+  - has_one :shipping_address
   - belongs_to :item
   
-  ### shipping address テーブル
-  | Column          | Type       | Options                       |
-  | ---- ------------------------------------------------------- |
-  | user_id         | references | null: false, foreign_key:true |
-  | post_code       | integer    | null: false                   |
-  | prefectures_id  |integer     | null: false                   |
-  | city            | string     | null: false                   |
-  | street          | string     | null: false                   |
-  | building        | string     | 
-  | telephone       | integer    | null: false                   |
+  ### shipping_address テーブル
+  | Column           | Type       | Options                       |
+  | ---- -------------------------------------------------------- |
+  | user             | references | null: false, foreign_key:true |
+  | post_code        | string     | null: false                   |
+  | shipping_area_id | integer    | null: false                   |
+  | city             | string     | null: false                   |
+  | street           | string     | null: false                   |
+  | building         | string     | 
+  | telephone        | integer    | null: false                   |
 
   ### Association
   - belongs_to :purchase
