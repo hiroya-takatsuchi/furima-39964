@@ -69,16 +69,16 @@ Things you may want to cover:
   - has_one :shipping_address
   - belongs_to :item
   
-  ### shipping_address テーブル
-  | Column           | Type       | Options                       |
-  | ---- -------------------------------------------------------- |
-  | user             | references | null: false, foreign_key:true |
-  | post_code        | string     | null: false                   |
-  | shipping_area_id | integer    | null: false                   |
-  | city             | string     | null: false                   |
-  | street           | string     | null: false                   |
-  | building         | string     | 
-  | telephone        | integer    | null: false                   |
+  ### shipping_addresses テーブル
+  | Column           | Type         | Options                       |
+  | ---- ---------------------------------------------------------- |
+  | post_code        | string       | null: false                   |
+  | shipping_area_id | integer      | null: false                   |
+  | city             | string       | null: false                   |
+  | street           | string       | null: false                   |
+  | building         | string       | 
+  | telephone        | string       | null: false                   |
+  | purchase         | references   | null: false, foreign_key:true |
 
   ### Association
   - belongs_to :purchase
