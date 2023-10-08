@@ -46,7 +46,7 @@ Things you may want to cover:
   | -------------------------------------------------------------------- |
   | user               | references      | null: false, foreign_key:true |
   | item               | string          | null: false                   |
-  | text               | text            | null: false                   |
+  | explanation        | text            | null: false                   |
   | category_id        | integer         | null: false                   |
   | status_id          | integer         | null: false                   |
   | delivery_charge_id | integer         | null: false                   |
