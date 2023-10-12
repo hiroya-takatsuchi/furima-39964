@@ -8,13 +8,10 @@ class ItemsController < ApplicationController
   end
   
   def create
-    Items.create(item_params)
+    items = Items.all
     redirect_to '/'
   end
 
-  private
-  def tweet_params
-    params.require(:item).permit(:name, :image, :text)
-  end
+  
 
 end
