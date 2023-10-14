@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const calculatedProfit = price - tax;
 
     // 結果を表示
-    addTaxPrice.textContent = tax.toFixed(0); // ()の中は小数点の数
-    profit.textContent = calculatedProfit.toFixed(0); 
+    addTaxPrice.textContent = Math.floor(tax).toString();
+    profit.textContent = Math.floor(calculatedProfit).toString(); 
   });
 });
