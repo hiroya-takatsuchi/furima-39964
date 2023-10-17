@@ -29,20 +29,40 @@ RSpec.describe PurchaseShippingAddress, type: :model do
         @purchase_shipping_address.valid?
         expect(@purchase_shipping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
-      it '発送の地域に「---」が選択されている場合は出品できない' do
+      it 'post_codeが全角を含んでいると保存できないこと' do
+        @purchase_shipping_address.post_code = '１１１-１１１１'
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+      end
+      it '発送先の地域に「---」が選択されている場合は出品できない' do
         @purchase_shipping_address.shipping_area_id = '1'
         @purchase_shipping_address.valid?
         expect(@purchase_shipping_address.errors.full_messages).to include("Shipping area can't be blank")
       end  
-      it 'priceが空だと保存できないこと' do
+      it 'cityが空だと保存できないこと' do
+        @purchase_shipping_address.city = ''
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("City can't be blank")
       end
-      it 'priceが全角数字だと保存できないこと' do
+      it 'streetが空だと保存できないこと' do
+        @purchase_shipping_address.street= ''
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("Street can't be blank")
       end
-      it 'priceが1円未満では保存できないこと' do
+      it 'telephoneが10桁未満だと保存できないこと' do
+        @purchase_shipping_address.telephone= '111111111'
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("Telephone of digits is incorrect")
       end
-      it 'priceが1,000,000円を超過すると保存できないこと' do
+      it 'telephoneが11桁以上だと保存できないこと' do
+        @purchase_shipping_address.telephone= '111111111111'
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("Telephone of digits is incorrect")
       end
-      it 'userが紐付いていないと保存できないこと' do
+      it 'telephoneが全角数字だと保存できないこと' do
+        @purchase_shipping_address.telephone= '１１１１１１１１１１１'
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("Telephone is invalid. Input only number")
       end
     end
   end
