@@ -2,20 +2,19 @@ class PurchasesController < ApplicationController
   before_action :authenticate_user!,only: [:index, :create]
   
   def index
-    @purchase_shippingaddress = PurchaseShippingAddress.new
+    @item = Item.find(params[:item_id])
+    @purchase_shipping_address = PurchaseShippingAddress.new
 
   end  
   
   
   def create
-    @purchase = Purchase.new(purchase_params)
-    @address = ShippingAddress.new(address_params)
+    @item =Item.find(params[:item_id])
+    @purchase_shipping_address = PurchaseShippingAddress.new(address_params)
 
-    if @purchase.valid? && @address.valid?
-      ActiveRecord::Base.transaction do
-        @purchase.save!
-        @address.save!
-      end
+    if @purchase_shipping_address.valid? 
+      pay_item
+      @purchase_shipping_address.save
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity
@@ -24,12 +23,17 @@ class PurchasesController < ApplicationController
 
   private
 
-  def purchase_params
-    params.permit(:price).merge(user_id: current_user.id)
+  def address_params
+    params.require(:purchase_shipping_address).permit(:post_code, :shipping_area_id, :city, :street, :building, :telephone).merge(item_id: @item.id, user_id: current_user.id, token: params[:token], price: @item.price)
   end
 
-  def address_params
-    params.permit(:post_code, :shipping_area, :city, :street, :building, :telephone).merge(purchase_id: @purchase.id)
+  def pay_item
+    Payjp.api_key = "sk_test_3414ffd90bd50f43ab723bb7"  
+    Payjp::Charge.create(
+      amount: address_params[:price],  # 商品の値段
+      card: address_params[:token],    # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+    )
   end
 
 end

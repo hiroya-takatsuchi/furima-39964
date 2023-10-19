@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
+  has_one :purchase
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   validates :image, presence: true
   validates :item, presence: true
