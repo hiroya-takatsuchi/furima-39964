@@ -9,7 +9,7 @@ class PurchaseShippingAddress
     validates :street
     validates :user_id
     validates :item_id
-    validates :token, presence: true
+    validates :token
     validates :telephone, format: { with: /\A\d{10,11}\z/, message: 'of digits is incorrect' }
   end
   validates :telephone, format: { with: /\A\d+\z/, message: 'is invalid. Input only number' }

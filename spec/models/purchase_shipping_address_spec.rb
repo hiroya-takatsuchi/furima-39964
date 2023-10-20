@@ -49,12 +49,17 @@ RSpec.describe PurchaseShippingAddress, type: :model do
         @purchase_shipping_address.valid?
         expect(@purchase_shipping_address.errors.full_messages).to include("Street can't be blank")
       end
+      it 'telephoneが空だと保存できないこと' do
+        @purchase_shipping_address.telephone = ''
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("Telephone can't be blank")
+      end
       it 'telephoneが10桁未満だと保存できないこと' do
         @purchase_shipping_address.telephone = '111111111'
         @purchase_shipping_address.valid?
         expect(@purchase_shipping_address.errors.full_messages).to include('Telephone of digits is incorrect')
       end
-      it 'telephoneが11桁以上だと保存できないこと' do
+      it 'telephoneが12桁以上だと保存できないこと' do
         @purchase_shipping_address.telephone = '111111111111'
         @purchase_shipping_address.valid?
         expect(@purchase_shipping_address.errors.full_messages).to include('Telephone of digits is incorrect')
