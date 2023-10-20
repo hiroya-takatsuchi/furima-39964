@@ -1,5 +1,6 @@
 const pay = () => {
-  const payjp = Payjp('pk_test_74ba2030a1fb9fc5795e0bb4')// PAY.JPテスト公開鍵
+  const publicKey = gon.public_key
+  const payjp = Payjp(publicKey) // PAY.JPテスト公開鍵
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -27,4 +28,5 @@ const pay = () => {
   });
 };
 
-window.addEventListener("load", pay);
+window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);
