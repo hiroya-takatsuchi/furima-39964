@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!,only: [:index, :create]
   before_action :set_item, only: [:index, :create]
-  before_action :redirect_if_sold, only: [:index, :create]
+  before_action :redirect_if_sold_or_owner, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -28,8 +28,8 @@ class PurchasesController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def redirect_if_sold
-    redirect_to root_path if @item.purchase.present?
+  def redirect_if_sold_or_owner
+    redirect_to root_path if @item.purchase.present? || current_user == @item.user
   end
 
   def address_params
